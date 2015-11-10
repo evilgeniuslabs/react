@@ -10,7 +10,7 @@ float level;
 
 int shown;
 
-int huesPerPixel = 240 / NUM_LEDS;
+int huesPerPixel = 255 / NUM_LEDS;
 
 uint32_t spectrumBar() {
     scale = 256.0;
@@ -29,6 +29,7 @@ uint32_t spectrumBar() {
     fill_solid(leds, NUM_LEDS, CRGB::Black);
 
     int val = level * scale;
+    val -= 5;
     if (val >= NUM_LEDS) val = NUM_LEDS - 1;
 
     if (val >= shown) {
@@ -40,7 +41,7 @@ uint32_t spectrumBar() {
     }
 
     for (int i = 0; i < shown; i++) {
-        leds[i] = ColorFromPalette(gPalette, i * huesPerPixel, 255, NOBLEND);
+        leds[i] = ColorFromPalette(gPalette, i * huesPerPixel + gHue, 255, NOBLEND);
     }
 
     return 0;
@@ -49,7 +50,7 @@ uint32_t spectrumBar() {
 const int ledsPerBand = NUM_LEDS / bandCount;
 
 uint32_t spectrumDots() {
-    scale = 2048;
+    scale = 256.0;
 
     gPalette = RainbowColors_p;
 
@@ -79,7 +80,7 @@ uint32_t spectrumDots() {
 
         if (val >= 256) val = 255;
 
-        leds[i] = ColorFromPalette(gPalette, i * 2, val, NOBLEND);
+        leds[i] = ColorFromPalette(gPalette, i * 2 + gHue, val, NOBLEND);
     }
 
     return 0;
