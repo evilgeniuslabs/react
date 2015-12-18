@@ -2,9 +2,9 @@
 
 Remote Controlled RGB LED Lamp
 
-[Demo Video](https://www.youtube.com/watch?v=SNaRzPEzEGE):
+[Demo Videos](https://youtu.be/IGJE5eCNUW8?list=PLUYGVM-2vDxLujbkkU5QxYM1JfkvjO6Ve):
 
-[![Demo Video](http://img.youtube.com/vi/SNaRzPEzEGE/0.jpg)](http://www.youtube.com/watch?v=SNaRzPEzEGE)
+[![Demo Videos](http://img.youtube.com/vi/IGJE5eCNUW8/0.jpg)](https://youtu.be/IGJE5eCNUW8?list=PLUYGVM-2vDxLujbkkU5QxYM1JfkvjO6Ve)
 
 Built with 126 APA102 LEDs and an infrared remote receiver, controlled with a [Teensy 3.2](https://www.pjrc.com/store/teensy32.html) or [Particle Photon](https://store.particle.io/?product=particle-photon), using the [FastLED library]().
 
