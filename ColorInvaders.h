@@ -10,8 +10,10 @@
 /* How long it takes for the weapon to recharge */
 #define RECHARGE_DELAY 64
 
+uint16_t invader_default_speed = 512;
+
 /* Speed of the invader - gradually reduces */
-static byte invader_speed = 100;
+uint16_t invader_speed = invader_default_speed;
 
 byte invaders[NUM_LEDS];
 byte invaders_colours[NUM_LEDS];
@@ -60,7 +62,7 @@ uint32_t colorInvaders()
         for (int i = 0; i < NUM_LEDS; i++)
             invaders[i] = 0;
 
-        invader_speed = 200;
+        invader_speed = invader_default_speed;
 
         return 0;
     }

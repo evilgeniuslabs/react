@@ -1,25 +1,20 @@
 /*
-* React: https://github.com/evilgeniuslabs/react
-*
-* Copyright (c) 2015 Jason Coon, Evil Genius Labs
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy of
-* this software and associated documentation files (the "Software"), to deal in
-* the Software without restriction, including without limitation the rights to
-* use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-* the Software, and to permit persons to whom the Software is furnished to do so,
-* subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-* FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-* COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-* IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-* CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+ * React: https://github.com/evilgeniuslabs/react
+ * Copyright (C) 2015 Jason Coon, Evil Genius Labs
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <SerialFlash.h>
 #include <Audio.h>
@@ -85,6 +80,7 @@ PatternFunctionPointer currentPattern;
 #include "ColorWaves.h"
 
 const PatternList patterns = {
+    waves,
     colorWaves,
     pride,
     softTwinkles,
@@ -234,6 +230,10 @@ void moveTo(int index) {
     currentPattern = patterns[currentIndex];
 
     fill_solid(leds, NUM_LEDS, CRGB::Black);
+
+    for (int i = 0; i < NUM_LEDS; i++) {
+        heat[i] = 0;
+    }
 
     EEPROM.write(1, currentIndex);
 }
@@ -495,15 +495,33 @@ void handleInput(unsigned int requestedDelay) {
 // scale the brightness of the screenbuffer down
 void dimAll(byte value)
 {
-    for (int i = 0; i < NUM_LEDS; i++){
-        leds[i].nscale8(value);
-    }
+  for (uint8_t i = 0; i < NUM_LEDS; i++){
+    leds[i].nscale8(value);
+  }
 }
 
 uint32_t showSolidColor() {
     fill_solid(leds, NUM_LEDS, solidColor);
 
     return 60;
+}
+
+uint32_t waves()
+{
+  static uint8_t theta = 0;
+
+  gPalette = OceanColors_p;
+
+  for ( uint8_t i = 0; i < NUM_LEDS; i++) {
+    uint8_t j = sin8(theta + i);
+    leds[i] = CHSV(160, 255, j);
+
+    leds[(NUM_LEDS - 1) - i] += CHSV(160, 255, j / 2);
+  }
+
+  EVERY_N_MILLISECONDS(30) { theta++; }
+
+  return 0;
 }
 
 uint32_t rainbow()

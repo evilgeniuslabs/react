@@ -79,7 +79,11 @@ uint32_t colorWaves()
     nblendPaletteTowardPalette( gCurrentPalette, gTargetPalette, 16);
   }
   
-  colorwaves( leds, NUM_LEDS, gCurrentPalette);
+  colorwaves( leds, NUM_LEDS / 2, gCurrentPalette);
+
+  for(uint8_t i = 0; i < NUM_LEDS / 2; i++) {
+    leds[(NUM_LEDS - 1) - i] = leds[i];
+  }
 
   return 20;
 }
