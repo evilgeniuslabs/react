@@ -5,6 +5,7 @@
 // See your doctor before using this code if you have certain neurological conditions.
 //
 // Mark Kriegsman, July 2015
+// https://gist.github.com/kriegsman/e9d2e153af7bf4770d5c
 
 
 #if FASTLED_VERSION < 3001000
