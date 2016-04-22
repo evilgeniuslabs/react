@@ -2,6 +2,7 @@
 //  look like a bolt of lightning
 //
 //  Daniel Wilson, 2014
+//  https://github.com/fibonacci162/LEDs
 //
 //  With BIG thanks to the FastLED community!
 
