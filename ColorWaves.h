@@ -1,3 +1,6 @@
+// ColorWavesWithPalettes by Mark Kriegsman
+// https://gist.github.com/kriegsman/8281905786e8b2632aeb
+
 // ten seconds per color palette makes a good demo
 // 20-120 is better for deployment
 #define SECONDS_PER_PALETTE 10
